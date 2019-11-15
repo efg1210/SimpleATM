@@ -73,7 +73,7 @@ public class ATM {
     }
     
     public void showBalance() {
-        System.out.println("\nCurrent balance: " + activeAccount.getBalance());
+        System.out.println("\nCurrent balance: " + activeAccount.getBalance() + "\n");
     }
     
     public void deposit() {
@@ -111,9 +111,9 @@ public class ATM {
         System.exit(0);
     }
     
-    public static void main(String[] args) {
-        ATM atm = new ATM();
-        
+    public static void main(String[] args) {    	
+    	ATM atm = new ATM();
+    	               
         atm.startup();
     }
 }
