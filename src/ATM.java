@@ -10,6 +10,13 @@ public class ATM {
     public static final int WITHDRAW = 3;
     public static final int LOGOUT = 4;
     
+    enum Status {
+    	VIEW,
+    	DEPOSIT,
+    	WITHDRAW,
+    	LOGOUT;
+    }
+    
     public ATM() {
         in = new Scanner(System.in);
         
@@ -19,27 +26,33 @@ public class ATM {
     public void startup() {
         System.out.println("Welcome to the AIT ATM!\n");
         
-        System.out.print("Account No.: ");
-        long accountNo = in.nextLong();
-        
-        System.out.print("PIN        : ");
-        int pin = in.nextInt();
-        
-        if (isValidLogin(accountNo, pin)) {
-            System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
-            
-            boolean validLogin = true;
-            while (validLogin) {
-                switch (getSelection()) {
-                    case VIEW: showBalance(); break;
-                    case DEPOSIT: deposit(); break;
-                    case WITHDRAW: withdraw(); break;
-                    case LOGOUT: validLogin = false; break;
-                    default: System.out.println("\nInvalid selection.\n"); break;
-                }
-            }
-        } else {
-            System.out.println("\nInvalid account number and/or PIN.\n");
+        while (true) {
+	        System.out.print("Account No.: ");
+	        long accountNo = in.nextLong();
+	        
+	        System.out.print("PIN        : ");
+	        int pin = in.nextInt();
+	        
+	        if (isValidLogin(accountNo, pin)) {
+	            System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
+	            
+	            boolean validLogin = true;
+	            while (validLogin) {
+	                switch (getSelection()) {
+	                    case VIEW: showBalance(); break;
+	                    case DEPOSIT: deposit(); break;
+	                    case WITHDRAW: withdraw(); break;
+	                    case LOGOUT: validLogin = false; break;
+	                    default: System.out.println("\nInvalid selection.\n"); break;
+	                }
+	            }
+	        } else {
+	        	if (accountNo = -1 && pin == -1) {
+	        		shutdown();
+	        	} else {
+	        		System.out.println("\nInvalid account number and/or PIN.\n");
+	        	}
+	        }
         }
     }
     
@@ -51,6 +64,7 @@ public class ATM {
         System.out.println("[1] View balance");
         System.out.println("[2] Deposit money");
         System.out.println("[3] Withdraw money");
+        System.out.println("[4] Logout");
         
         return in.nextInt();
     }
@@ -73,6 +87,15 @@ public class ATM {
         
         activeAccount.withdraw(amount);
         System.out.println();
+    }
+    
+    public void  shutdown() {
+    	if (in != null) {
+    		in.close();
+    	}
+    	
+    	System.out.println("\nGoodbye!");
+        System.exit(0);
     }
     
     public static void main(String[] args) {
