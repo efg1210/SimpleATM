@@ -40,7 +40,7 @@ public class BankAccount {
 			balance += amount;
 		}
 		
-		return ATM.SUCCESS
+		return ATM.SUCCESS;
 	}
 	
 	public int withdraw(double amount) {

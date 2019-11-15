@@ -23,7 +23,7 @@ public class ATM {
     public ATM() {
         in = new Scanner(System.in);
         
-        activeAccount = new BankAccount(1234, 123456789, 0, new User("Ryan", "Wilson"));
+        activeAccount = new BankAccount(1234, new User("Ryan", "Wilson"));
     }
     
     public void startup() {
@@ -50,7 +50,7 @@ public class ATM {
 	                }
 	            }
 	        } else {
-	        	if (accountNo = -1 && pin == -1) {
+	        	if (accountNo == -1 && pin == -1) {
 	        		shutdown();
 	        	} else {
 	        		System.out.println("\nInvalid account number and/or PIN.\n");
